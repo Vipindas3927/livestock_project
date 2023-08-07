@@ -59,11 +59,11 @@ def login_view(request):
           return redirect('/home')
       else:
           messages.error(request, "INVALID CREDENTIALS")
-          return redirect('/login')
+          return redirect('/login/')
     return render(request, "animals/login.html")
 
 
-@login_required(login_url='login')
+@login_required(login_url='login/')
 def home(request):
     data = stock.objects.all()
     context = {"data": data}
