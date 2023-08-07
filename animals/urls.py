@@ -7,7 +7,7 @@ from django.conf.urls.static import static
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
-
+from django.contrib.auth import views as auth_views
 # Add the following line at the end of your urlpatterns
 
 
@@ -26,5 +26,10 @@ urlpatterns = [
     path('upload/', views.upload_video, name='upload_video'),
     # path('list/', views.video_list, name='video_list'),
     path('video/<int:video_id>/', views.video_detail, name='video_detail'),
+
+    path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
+    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
